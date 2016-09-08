@@ -201,11 +201,6 @@ class Game:
                 continue;
             c.discounts.append(dis);
 
-    def generateData(self):
-        
-    
-    
-    
     
     
     
