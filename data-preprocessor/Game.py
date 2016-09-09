@@ -174,7 +174,7 @@ class Game:
                 c.extractTimeUniFeature();
                 
                 # Data Cleaning
-                
+                '''
                 for c in self.country_set.values:
                     if c.name != self.target_country:
                         self.fillMissingValue(c);
@@ -186,7 +186,7 @@ class Game:
                 # Exract Time Releative Feature on each time slot
             
                 c.extractTimeRelFeature();
-        
+                '''
 
     def fillMissingValue(self, c):
         

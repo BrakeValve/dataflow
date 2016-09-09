@@ -11,14 +11,19 @@ from Game import Game
 def listFilePath(path):
     file_path = [];
     file_name = [];
+    directory_path = [];
     for (dirpath, dirnames, filenames) in os.walk(path):
         for name in filenames:
             tmp = os.path.join(dirpath, name);
             file_path.append(tmp);
             file_name.append(name);
+        for name in dirnames:
+            tmp = os.path.join(dirpath, name);
+            directory_path.append(tmp);
         break
 
-    return {'file_path':file_path,'file_name':file_name}
+    return {'file_path':file_path,'file_name':file_name,'directory_path':directory_path}
+
 
 #def main():
 
@@ -51,14 +56,26 @@ genres_set = {};
 
 game_set = {};
 
-list_meta = listFilePath(METADATA_DIRECTORY);
-
 # Create Game Object form metadata
+list_meta = listFilePath(METADATA_DIRECTORY);
 
 for meta_path in list_meta['file_path']:
     g = Game(meta_path,TARGET_COUNTRY);
-    print g.id
     game_set[g.id] = g;
+   
+    
+# Add historical data from different conutries
+
+list_c = listFilePath(PRICE_DATA_DIRECTORY);
+for c_path in list_c['directory_path']:
+    list_price = listFilePath(c_path);
+    for price_path in list_price['file_name']:
+        filename = price_path.split('_');
+        c = filename[2];
+        g_id = filename[3].split('.')[0];
+        game_set.get(g_id).addcountry(c,c_path+'/'+price_path);
+        break;
+        
     
 
 
