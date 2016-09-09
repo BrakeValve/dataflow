@@ -188,7 +188,7 @@ class Game:
             if c_first_date == t:
                 break;
             pre_discounts.append(dis);
-        c.discounts = pre_discounts + c.discounts;
+        c.discounts = pre_discounts.extend(c.discounts);
                 
         # Filling tail missing values
                 
