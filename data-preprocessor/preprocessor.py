@@ -74,7 +74,7 @@ for c_path in list_c['directory_path']:
         c = filename[2];
         g_id = filename[3].split('.')[0];
         game_set.get(g_id).addcountry(c,c_path+'/'+price_path);
-        break;
+        
         
     
 

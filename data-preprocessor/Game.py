@@ -142,7 +142,10 @@ class Game:
                     c.times.append(timestamp);
                     c.prices.append(p);
                     c.org_prices.append(o_p);
-                    c.discounts.append(p/o_p);
+                    if p == 0 :
+                        c.discounts.append(1.0);
+                    else:
+                        c.discounts.append(p/o_p);
                     pre_time = timestamp;
             f.close();
             
@@ -173,20 +176,21 @@ class Game:
                     
                 c.extractTimeUniFeature();
                 
-                # Data Cleaning
-                '''
-                for c in self.country_set.values:
-                    if c.name != self.target_country:
-                        self.fillMissingValue(c);
-                    else:
-                        # compute delta between the first date and the release date
-                        self.days_from_release = int((datetime.datetime.strptime(c.times[len(c.times)-1],'%Y-%m-%d') - self.release_date).days);
+    def cleanDataAndEctractTime(self):
+        # Data Cleaning
+        
+        for c in self.country_set.values:
+            if c.name != self.target_country:
+                self.fillMissingValue(c);
+            else:
+                # compute delta between the first date and the release date
+                self.days_from_release = int((datetime.datetime.strptime(c.times[len(c.times)-1],'%Y-%m-%d') - self.release_date).days);
+        
+        
+        # Exract Time Releative Feature on each time slot
+    
+        c.extractTimeRelFeature();
                 
-                
-                # Exract Time Releative Feature on each time slot
-            
-                c.extractTimeRelFeature();
-                '''
 
     def fillMissingValue(self, c):
         
