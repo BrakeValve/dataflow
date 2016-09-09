@@ -53,10 +53,16 @@ game_set = {};
 
 list_meta = listFilePath(METADATA_DIRECTORY);
 
+# Create Game Object form metadata
+
 for meta_path in list_meta['file_path']:
     g = Game(meta_path,TARGET_COUNTRY);
     print g.id
     game_set[g.id] = g;
+    
+
+
+        
         
 
 #if __name__ == "__main__":

@@ -31,11 +31,22 @@ class Game:
             # Binary feature
             self.id = tmp_json["App ID"];
             self.developer = tmp_json["Developer"];
-            self.publisher = tmp_json["Publisher"];
-            self.geners = tmp_json['Genres'].split(',');
+            if tmp_json.get("Publisher") == None:
+                self.publisher = self.developer
+            else:
+                self.publisher = tmp_json["Publisher"];
+                
+            if tmp_json.get("Genres") == None:
+                self.geners = [];
+            else:
+                self.geners = tmp_json['Genres'].split(',');
     
             # pares to datetime
-            self.release_date = datetime.datetime.strptime(tmp_json["Release Date"].replace(' 0',' '),'%B %d, %Y ');    
+            if tmp_json.get("Release Date") == None:
+                self.release_date = datetime.datetime.now() - datetime.timedelta(days=730);
+            else:
+                self.release_date = datetime.datetime.strptime(tmp_json["Release Date"].replace(' 0',' '),'%B %d, %Y ');    
+            
             self.days_from_release = 0;
                         
             # Country hash map
