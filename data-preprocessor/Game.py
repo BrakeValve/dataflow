@@ -7,6 +7,7 @@ Created on Sun Aug 21 21:25:11 2016
 import json
 import datetime
 import numpy as np
+import math
 
 class Game:
     # some CCC curve parameter
@@ -31,6 +32,7 @@ class Game:
             # Binary feature
             self.id = tmp_json["App ID"];
             self.developer = tmp_json["Developer"];
+            
             if tmp_json.get("Publisher") == None:
                 self.publisher = self.developer
             else:
@@ -143,7 +145,7 @@ class Game:
                     c.prices.append(p);
                     c.org_prices.append(o_p);
                     if p == 0 :
-                        c.discounts.append(1.0);
+                        c.discounts.append(0.0);
                     else:
                         c.discounts.append(p/o_p);
                     pre_time = timestamp;
@@ -179,44 +181,86 @@ class Game:
     def cleanDataAndEctractTime(self):
         # Data Cleaning
         
-        for c in self.country_set.values:
+        for c in self.country_set.values():
             if c.name != self.target_country:
                 self.fillMissingValue(c);
+
             else:
                 # compute delta between the first date and the release date
                 self.days_from_release = int((datetime.datetime.strptime(c.times[len(c.times)-1],'%Y-%m-%d') - self.release_date).days);
+
+            # Exract Time Releative Feature on each time slot
         
-        
-        # Exract Time Releative Feature on each time slot
-    
-        c.extractTimeRelFeature();
+            c.extractTimeRelFeature();
                 
 
     def fillMissingValue(self, c):
         
         # Filling head missing values
+        dis =  c.discounts[0]
         
-        dis =  c.prices[0]/c.org_prices[0];
         c_first_date = c.times[0];
         pre_discounts = [];
         for t in self.country_set[self.target_country].times:
+            
             if c_first_date == t:
                 break;
+         #   print c_first_date +' '+t
             pre_discounts.append(dis);
-        c.discounts = pre_discounts.extend(c.discounts);
-                
+
+        pre_discounts.extend(c.discounts)
+        #print 'pre :' + str(len(pre_discounts));
+        c.discounts = pre_discounts;
+
         # Filling tail missing values
-                
-        dis = c.prices[len(c.prices)-1] / c.org_prices[len(c.org_prices)-1];
+
+        dis = c.discounts[len(c.prices)-1];
         # shift one day
         c_last_date = (datetime.datetime.strptime(c.times[len(c.times)-1],'%Y-%m-%d') +datetime.timedelta(days=1)).strftime('%Y-%m-%d');
-       
+        #c_last_date = c.times[len(c.times)-1];
+        flag = False;
         for t in self.country_set[self.target_country].times:
+            
             if c_last_date == t:
-                continue;
-            c.discounts.append(dis);
-
-    
+                flag = True;
+            if flag :
+                c.discounts.append(dis);
+                
+    def getLabels(self):
+        
+        # Use CCC curve to genrative reasonable labels
+        # Note that CCC curve will highly affect the traing result
+        
+        target_c = self.country_set.get(self.target_country);              
+        durations = target_c.durations;
+        count = 1 ;
+        flag = False;
+        index = 0;
+        
+        for dis in target_c.discounts:
+            if dis != 1.0 and not flag:
+                # if it had discount, label it Don't buy
+                self.lables.append(1);
+            elif dis != 1.0 and flag:
+                flag = False;
+                self.lables.append(1);
+                count = 1;
+                index = index +1;
+            elif dis == 1.0 and not flag:       
+                flag = True;
+                # if it haven't had discount for more than 20 days, apply CCC curve
+                if durations[index] <= 20 or count + 20 >= durations[index]:
+                    self.lables.append(0);
+                else:
+                    self.lables.append( math.log(float((durations[index]-20)) / count) / math.log(durations[index]) );
+                count = count +1;
+            elif dis == 1.0 and flag:
+               
+                if durations[index] <= 20 or count + 20 >= durations[index]:
+                    self.lables.append(0);
+                else:
+                    self.lables.append( math.log(float((durations[index]-20)) / count) / math.log(durations[index]) );
+                count = count +1;
     
     
     
