@@ -7,6 +7,7 @@ Created on Thu Sep 08 16:16:41 2016
 from optparse import OptionParser
 import os
 from Game import Game
+import datetime
 
 def listFilePath(path):
     File = [];
@@ -44,6 +45,10 @@ if options.PRICE_DATA_DIRECTORY != None:
     PRICE_DATA_DIRECTORY = options.PRICE_DATA_DIRECTORY;
 if options.TRAINING_OUTPUT_DIRECTORY != None:
     TRAINING_OUTPUT_DIRECTORY = options.TRAINING_OUTPUT_DIRECTORY;
+    
+if not os.path.exists(TRAINING_OUTPUT_DIRECTORY):
+    print "Can't not find output directory, Create a new one"
+    os.makedirs(TRAINING_OUTPUT_DIRECTORY)
 
 # Store for Binary feature needs
  
@@ -91,10 +96,11 @@ for g in game_set.values():
 
 for g in game_set.values():
     
-    # filter some bias games    
-    if len(g.times) == 0 or g.mean_duration > 250:
-        continue;
     target_c = g.country_set[g.target_country];
+    # filter some bias games    
+    if len(target_c.times) == 0 or target_c.mean_duration > 250:
+        continue;
+    
     
     f = open(TRAINING_OUTPUT_DIRECTORY+'/app_training_'+g.id+'.csv','w');
     
@@ -133,7 +139,7 @@ for g in game_set.values():
         # Static
         #for c in g.country_set
         c = target_c;
-        o.extend( [c.mean_duration ,c.var_duration ,c.mean_discount,c.var_discount ,c.mean_price ,c.var_price ,c.mean_org_price ,c.var_org_price]);
+        o.extend( [c.mean_org_price ,c.var_org_price ,c.mean_price ,c.var_price,c.mean_duration ,c.var_duration ,c.mean_discount,c.var_discount ]);
         
         # days_since_last_dis
         o.append(target_c.days_since_last_dis[i]);
@@ -144,10 +150,18 @@ for g in game_set.values():
         # days from release
         o.append(g.days_from_release + i )
         
-        # date 
+        # date month, day, weekday
+        t = datetime.datetime.strptime(target_c.times[i],'%Y-%m-%d');
+        o.extend([t.month,t.day,t.weekday()+1]);
         
+        o.append('\n');
+        
+        # str() to all data
+        o = map(str,o);
+        
+        f.write(','.join(o))
     f.close();
-    
+    break;
 
 
         
