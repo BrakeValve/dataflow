@@ -86,19 +86,19 @@ class Game:
             
             # Every day price
             self.mean_price = np.mean(self.prices);
-            self.var_price = np.std(self.prices);
+            self.var_price = np.var(self.prices);
             
             # Every day origin price (msrp may decriese ) 
             self.mean_org_price = np.mean(self.org_prices);
-            self.var_org_price = np.std(self.mean_org_price);
+            self.var_org_price = np.var(self.mean_org_price);
         
             # discount to every day 
             self.mean_discount = np.mean(self.trimmed_discounts);
-            self.var_discount = np.std(self.trimmed_discounts);
+            self.var_discount = np.var(self.trimmed_discounts);
             
             # Druation of every discount  
             self.mean_duration = np.mean(self.durations);
-            self.var_duration = np.std(self.durations);
+            self.var_duration = np.var(self.durations);
             
         def extractTimeRelFeature(self):
             
