@@ -9,20 +9,19 @@ import os
 from Game import Game
 
 def listFilePath(path):
-    file_path = [];
-    file_name = [];
-    directory_path = [];
+    File = [];
+    Dir = [];
+
     for (dirpath, dirnames, filenames) in os.walk(path):
         for name in filenames:
             tmp = os.path.join(dirpath, name);
-            file_path.append(tmp);
-            file_name.append(name);
+            File.append({'path':tmp,'name':name});
         for name in dirnames:
             tmp = os.path.join(dirpath, name);
-            directory_path.append(tmp);
+            Dir.append({'path':tmp,'name':name});
         break
 
-    return {'file_path':file_path,'file_name':file_name,'directory_path':directory_path}
+    return {'file' : File , 'dir' : Dir};
 
 
 #def main():
@@ -48,9 +47,10 @@ if options.TRAINING_OUTPUT_DIRECTORY != None:
 
 # Store for Binary feature needs
  
-developer_set = {};
-publisher_set = {};
-genres_set = {};
+developer_set = set();
+publisher_set = set();
+genres_set = set();
+country_set = set();
 
 # Store ID to Game Object
 
@@ -59,23 +59,94 @@ game_set = {};
 # Create Game Object form metadata
 list_meta = listFilePath(METADATA_DIRECTORY);
 
-for meta_path in list_meta['file_path']:
-    g = Game(meta_path,TARGET_COUNTRY);
+for meta in list_meta['file']:
+    g = Game(meta['path'],TARGET_COUNTRY);
     game_set[g.id] = g;
-   
+    
+    developer_set.add(g.developer);
+    publisher_set.add(g.publisher);
+    genres_set = genres_set.union(set(g.geners));
+    
     
 # Add historical data from different conutries
 
 list_c = listFilePath(PRICE_DATA_DIRECTORY);
-for c_path in list_c['directory_path']:
-    list_price = listFilePath(c_path);
-    for price_path in list_price['file_name']:
-        filename = price_path.split('_');
-        c = filename[2];
-        g_id = filename[3].split('.')[0];
-        game_set.get(g_id).addcountry(c,c_path+'/'+price_path);
+for c in list_c['dir']:
+    list_price = listFilePath(c['path']);
+    for p in list_price['file']:
+        country_set.add(c['name']);
+        g_id = p['name'].split('_')[3].split('.')[0];
+        game_set.get(g_id).addcountry(c['name'],c['path']+'/'+p['path']);
         
         
+# Data Cleaning on every country and get lables depend on the target country
+for g in game_set.values():
+    g.cleanDataAndEctractTime();
+    g.getLabels();
+
+# Get AND set of all games' countrysets
+
+for g in game_set.values():
+    country_set = country_set & set(g.country_set.keys());
+
+for g in game_set.values():
+    
+    # filter some bias games    
+    if len(g.times) == 0 or g.mean_duration > 250:
+        continue;
+    target_c = g.country_set[g.target_country];
+    
+    f = open(TRAINING_OUTPUT_DIRECTORY+'/app_training_'+g.id+'.csv','w');
+    
+    for i in range (len(g.country_set[g.target_country].times)):
+        o = [];
+        # fliter preorder price data
+        if g.days_from_release + i < 0 :
+            continue;
+        # Label
+        if g.lables[i] > g.THRESHOLD:
+            o.append('1');
+        else :
+            if g.lables[i] > 0 :
+                o.append('0');
+            else :
+                o.append('-1');
+        # Developer
+        for d in list(developer_set):
+            if g.developer == d :
+               o.append('1');
+            else:
+               o.append('0');
+        # Publisher
+        for p in list(publisher_set):
+            if g.publisher == p :
+               o.append('1');
+            else:
+               o.append('0');
+        # Genres
+        gens = set(g.geners);
+        for gen in list(genres_set):
+            if gen in gens:
+               o.append('1');
+            else:
+               o.append('0');
+        # Static
+        #for c in g.country_set
+        c = target_c;
+        o.extend( [c.mean_duration ,c.var_duration ,c.mean_discount,c.var_discount ,c.mean_price ,c.var_price ,c.mean_org_price ,c.var_org_price]);
+        
+        # days_since_last_dis
+        o.append(target_c.days_since_last_dis[i]);
+        for c in g.country_set.values():
+            if c.name == target_c.name:
+                continue;
+            o.append(c.days_since_last_dis[i]);
+        # days from release
+        o.append(g.days_from_release + i )
+        
+        # date 
+        
+    f.close();
     
 
 
