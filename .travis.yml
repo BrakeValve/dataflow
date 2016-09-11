@@ -2,9 +2,9 @@ language: python
 matrix:
   include:
     - python: 2.7
-      env: NUMPY=1.8 SCIPY=0.13
+      env: NUMPY=1.8
     - python: 3.5
-      env: NUMPY=1.8 SCIPY=0.13
+      env: NUMPY=1.8
 
 before_install:
     - travis_retry wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh -O miniconda.sh
@@ -17,11 +17,10 @@ before_install:
 install:
     - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
     - source activate test
-    - conda install --yes numpy=$NUMPY scipy=$SCIPY matplotlib pip
+    - conda install --yes numpy=$NUMPY
     - pip install setuptools
     - npm install -g eclint
     - pip install -r requirements.txt
-    - python setup.py install
 script:
     - flake8
     - eclint check */*.py
