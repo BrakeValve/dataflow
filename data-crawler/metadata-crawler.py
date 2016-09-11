@@ -21,7 +21,7 @@ if options.OUTPUT_DIRECTORY is not None:
     OUTPUT_DIRECTORY = options.OUTPUT_DIRECTORY
 
 if not os.path.exists(OUTPUT_DIRECTORY):
-    print "Can't not find output directory, Create a new one"
+    print("Can't not find output directory, Create a new one")
     os.makedirs(OUTPUT_DIRECTORY)
 
 ids = [

@@ -20,7 +20,7 @@ class Game:
         try:
             f = open(json_path_string, 'r')
         except IOError:
-            print 'Cannot open file', json_path_string
+            print('Cannot open file', json_path_string)
         else:
             # parse json
             tmp_json = json.loads(f.read())
@@ -126,7 +126,7 @@ class Game:
         try:
             f = open(file_path_string, 'r')
         except IOError:
-            print 'Cannot open file', file_path_string
+            print('Cannot open file', file_path_string)
         else:
             c = self.Country(name)
 
