@@ -1,0 +1,4 @@
+beautifulsoup4
+flake8
+numpy
+requests
