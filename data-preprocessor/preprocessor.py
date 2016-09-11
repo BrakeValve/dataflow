@@ -8,22 +8,7 @@ from optparse import OptionParser
 import os
 from Game import Game
 import datetime
-
-def listFilePath(path):
-    File = [];
-    Dir = [];
-
-    for (dirpath, dirnames, filenames) in os.walk(path):
-        for name in filenames:
-            tmp = os.path.join(dirpath, name);
-            File.append({'path':tmp,'name':name});
-        for name in dirnames:
-            tmp = os.path.join(dirpath, name);
-            Dir.append({'path':tmp,'name':name});
-        break
-
-    return {'file' : File , 'dir' : Dir};
-
+from listFile import listFilePath
 
 #def main():
 
@@ -161,7 +146,7 @@ for g in game_set.values():
         
         f.write(','.join(o))
     f.close();
-    break;
+    
 
 
         
