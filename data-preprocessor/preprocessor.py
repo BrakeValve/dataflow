@@ -66,7 +66,7 @@ for c in list_c['dir']:
     for p in list_price['file']:
         country_set.add(c['name'])
         g_id = p['name'].split('_')[3].split('.')[0]
-        game_set.get(g_id).addcountry(c['name'], c['path'] + '/' + p['path'])
+        game_set.get(g_id).addcountry(c['name'], p['path'])
 
 
 # Data Cleaning on every country and get lables depend on the target country
