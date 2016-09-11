@@ -1,7 +1,4 @@
 language: python
-python:
-  - '2.7'
-  - '3.5'
 matrix:
   include:
     - python: 2.7
@@ -9,17 +6,23 @@ matrix:
     - python: 3.5
       env: NUMPY=1.8 SCIPY=0.13
 
-before_script:
-  - wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh -O miniconda.sh
-  - chmod +x miniconda.sh
-  - export PATH=/home/travis/miniconda/bin:$PATH
-  - conda install --yes numpy=1.8
-  - sudo apt-get -qq update
-  - sudo apt-get install -y nodejs npm
+before_install:
+    - travis_retry wget http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh -O miniconda.sh
+    - chmod +x miniconda.sh
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH=/home/travis/miniconda/bin:$PATH
+    - conda update --yes conda
+    - sudo apt-get -qq update
+    - sudo apt-get install -y nodejs npm
 install:
-  - npm install -g eclint
-  - pip install -r requirements.txt
+    - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
+    - source activate test
+    - conda install --yes numpy=$NUMPY scipy=$SCIPY matplotlib pip
+    - pip install setuptools
+    - npm install -g eclint
+    - pip install -r requirements.txt
+    - python setup.py install
 script:
-  - flake8
-  - eclint check */*.py
-  - "sudo sh ./.travis/run_test.sh"
+    - flake8
+    - eclint check */*.py
+    - "sudo sh ./.travis/run_test.sh"
