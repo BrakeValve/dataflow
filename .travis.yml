@@ -11,4 +11,4 @@ install:
 script:
   - flake8
   - eclint check */*.py
-  - "./.travis/run_test.sh"
+  - "sudo ./.travis/run_test.sh"
