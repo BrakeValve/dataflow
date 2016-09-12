@@ -49,8 +49,7 @@ n_iter_search = 20
 random_search = RandomizedSearchCV(clf, param_distributions=param_dister, n_iter=n_iter_search, n_jobs=2)
 start = time()
 random_search.fit(X, y)
-print("RandomizedSearchCV took %.2f seconds for %d candidates"
-      " parameter settings." % ((time() - start), n_iter_search))
+print("RandomizedSearchCV took %.2f s for %d candidates"" parameter settings." % ((time() - start), n_iter_search))
 
 # report(random_search.grid_scores_)
 inst = genfromtxt('instance.csv', delimiter=',')
