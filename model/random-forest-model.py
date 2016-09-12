@@ -37,16 +37,16 @@ def report(grid_scores, n_top=3):
 
 
 # specify parameters and distributions to sample from
-param_dist = {"max_depth": [3, None],
-              "max_features": sp_randint(1, 11),
-              "min_samples_split": sp_randint(1, 11),
-              "min_samples_leaf": sp_randint(1, 11),
-              "bootstrap": [True, False],
-              "criterion": ["gini", "entropy"]}
+param_dister = {"max_depth": [3, None],
+                "max_features": sp_randint(1, 11),
+                "min_samples_split": sp_randint(1, 11),
+                "min_samples_leaf": sp_randint(1, 11),
+                "bootstrap": [True, False],
+                "criterion": ["gini", "entropy"]}
 
 # run randomized search
 n_iter_search = 20
-random_search = RandomizedSearchCV(clf, param_distributions=param_dist, n_iter=n_iter_search, n_jobs=2)
+random_search = RandomizedSearchCV(clf, param_distributions=param_dister, n_iter=n_iter_search, n_jobs=2)
 start = time()
 random_search.fit(X, y)
 print("RandomizedSearchCV took %.2f seconds for %d candidates"
