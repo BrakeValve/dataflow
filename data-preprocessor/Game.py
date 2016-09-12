@@ -10,6 +10,8 @@ import math
 
 
 def mean_var(seq):
+    if(len(seq) == 0):
+        return [0, 0]
     m = sum(seq)/len(seq)
     v = sum(map(lambda x: (x-m)*(x-m), seq))/len(seq)
     return [m, v]
