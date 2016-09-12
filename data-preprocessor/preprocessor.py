@@ -33,7 +33,7 @@ if options.PRICE_DATA_DIRECTORY is not None:
 if options.TRAINING_OUTPUT_DIRECTORY is not None:
     TRAINING_OUTPUT_DIRECTORY = options.TRAINING_OUTPUT_DIRECTORY
 if options.TRAINING_RATE is not None:
-    
+    TRAINING_RATE = float(TRAINING_RATE);
 
 if not os.path.exists(TRAINING_OUTPUT_DIRECTORY):
     print("Can't not find output directory, Create a new one")
