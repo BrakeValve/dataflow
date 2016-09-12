@@ -14,7 +14,6 @@ class Game:
     # some CCC curve parameter
     MIN_WAIT_DAY = 20
     THRESHOLD = 0.2
-    TRAINRATE = 0.8
 
     def __init__(self, json_path_string, target_country):
         try:

@@ -15,6 +15,7 @@ from listFile import listFilePath
 METADATA_DIRECTORY = '../../new_meta'
 PRICE_DATA_DIRECTORY = '../../price_data'
 TRAINING_OUTPUT_DIRECTORY = '../../traing_data'
+TRAINING_RATE = 0.8;
 
 TARGET_COUNTRY = 'us'
 
@@ -22,6 +23,7 @@ parser = OptionParser()
 parser.add_option("-m", dest="METADATA_DIRECTORY")
 parser.add_option("-p", dest="PRICE_DATA_DIRECTORY")
 parser.add_option("-t", dest="TRAINING_OUTPUT_DIRECTORY")
+parser.add_option("-r", dest="TRAINING_RATE")
 (options, args) = parser.parse_args()
 
 if options.METADATA_DIRECTORY is not None:
@@ -30,6 +32,8 @@ if options.PRICE_DATA_DIRECTORY is not None:
     PRICE_DATA_DIRECTORY = options.PRICE_DATA_DIRECTORY
 if options.TRAINING_OUTPUT_DIRECTORY is not None:
     TRAINING_OUTPUT_DIRECTORY = options.TRAINING_OUTPUT_DIRECTORY
+if options.TRAINING_RATE is not None:
+    
 
 if not os.path.exists(TRAINING_OUTPUT_DIRECTORY):
     print("Can't not find output directory, Create a new one")
