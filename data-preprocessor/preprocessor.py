@@ -15,7 +15,7 @@ from listFile import listFilePath
 METADATA_DIRECTORY = '../../new_meta'
 PRICE_DATA_DIRECTORY = '../../price_data'
 TRAINING_OUTPUT_DIRECTORY = '../../traing_data'
-TRAINING_RATE = 0.8;
+TRAINING_RATE = 0.8
 
 TARGET_COUNTRY = 'us'
 
@@ -33,7 +33,7 @@ if options.PRICE_DATA_DIRECTORY is not None:
 if options.TRAINING_OUTPUT_DIRECTORY is not None:
     TRAINING_OUTPUT_DIRECTORY = options.TRAINING_OUTPUT_DIRECTORY
 if options.TRAINING_RATE is not None:
-    TRAINING_RATE = float(TRAINING_RATE);
+    TRAINING_RATE = float(TRAINING_RATE)
 
 if not os.path.exists(TRAINING_OUTPUT_DIRECTORY):
     print("Can't not find output directory, Create a new one")
