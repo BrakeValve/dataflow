@@ -90,6 +90,7 @@ train_o = []
 test_f = open(TRAINING_OUTPUT_DIRECTORY + '/testing_matrix.csv', 'w')
 test_o = []
 data_f = open(TRAINING_OUTPUT_DIRECTORY + '/data_matrix.csv', 'w')
+intstance_f = open(TRAINING_OUTPUT_DIRECTORY + '/instance.csv', 'w')
 
 for g in game_set.values():
     g.setTestStartPoint(TRAINING_RATE)
@@ -100,19 +101,12 @@ for g in game_set.values():
 
     f = open(TRAINING_OUTPUT_DIRECTORY + '/app_training_' + g.id + '.csv', 'w')
 
-    for i in range(len(g.country_set[g.target_country].times)):
+    for i in range(len(target_c.times)):
         o = []
         # fliter preorder price data
         if g.days_from_release + i < 0:
             continue
-        # Label
-        if g.lables[i] > g.THRESHOLD:
-            o.append('1')
-        else:
-            if g.lables[i] > 0:
-                o.append('0')
-            else:
-                o.append('-1')
+
         # Developer
         for d in list(developer_set):
             if g.developer == d:
@@ -155,11 +149,25 @@ for g in game_set.values():
         o.extend([t.month, t.day, t.weekday() + 1])
 
         o.append('\n')
-
         # str() to all data
         o = map(str, o)
         o = ','.join(o)
+
+        # output intstance with id append
+        if (i == len(target_c.times)-1):
+            intstance_f.write(g.id + ',' + o)
+
+        # Label
+        if g.lables[i] > g.THRESHOLD:
+            o = '1,' + o
+        else:
+            if g.lables[i] > 0:
+                o = '0,' + o
+            else:
+                o = '-1,' + o
+
         f.write(o)
+        # separte testing and training data
         if (i < g.test_begin - 1):
             train_o.append(o)
         else:
@@ -167,8 +175,13 @@ for g in game_set.values():
 
     f.close()
 
+intstance_f.close()
+
 train_f.write(''.join(train_o))
 test_f.write(''.join(test_o))
 data_f.write(''.join(train_o+test_o))
+train_f.close()
+test_f.close()
+data_f.close()
 # if __name__ == "__main__":
 #    main();
