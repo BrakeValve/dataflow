@@ -56,6 +56,8 @@ class Game:
                     tmp_json["Release Date"].replace(' 0', ' '), '%B %d, %Y '
                 )
 
+            self.test_begin = 0
+
             self.days_from_release = 0
 
             # Country hash map
@@ -223,6 +225,14 @@ class Game:
                 flag = True
             if flag:
                 c.discounts.append(dis)
+
+    def setTestStartPoint(self, TRAINING_RATE):
+        target_c = self.country_set.get(self.target_country)
+        if(self.days_from_release >= 0):
+            self.test_begin = int(math.floor(len(target_c.times) * TRAINING_RATE))
+        else:
+            self.test_begin = math.floor((len(target_c.times) + self.days_from_release) * TRAINING_RATE)
+            self.test_begin = int(self.test_begin - self.days_from_release)
 
     def getLabels(self):
 

@@ -83,8 +83,16 @@ for g in game_set.values():
 for g in game_set.values():
     country_set = country_set & set(g.country_set.keys())
 
-for g in game_set.values():
+# Output
 
+train_f = open(TRAINING_OUTPUT_DIRECTORY + '/traing_matrix.csv', 'w')
+train_o = []
+test_f = open(TRAINING_OUTPUT_DIRECTORY + '/testing_matrix.csv', 'w')
+test_o = []
+data_f = open(TRAINING_OUTPUT_DIRECTORY + '/data_matrix.csv', 'w')
+
+for g in game_set.values():
+    g.setTestStartPoint(TRAINING_RATE)
     target_c = g.country_set[g.target_country]
     # filter some bias games
     if len(target_c.times) == 0 or target_c.mean_duration > 250:
@@ -150,9 +158,17 @@ for g in game_set.values():
 
         # str() to all data
         o = map(str, o)
+        o = ','.join(o)
+        f.write(o)
+        if (i < g.test_begin - 1):
+            train_o.append(o)
+        else:
+            test_o.append(o)
 
-        f.write(','.join(o))
     f.close()
 
+train_f.write(''.join(train_o))
+test_f.write(''.join(test_o))
+data_f.write(''.join(train_o+test_o))
 # if __name__ == "__main__":
 #    main();
