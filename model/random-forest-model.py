@@ -30,8 +30,8 @@ def report(grid_scores, n_top=3):
     for i, score in enumerate(top_scores):
         print("Model with rank: {0}".format(i + 1))
         print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
-              score.mean_validation_score,
-              np.std(score.cv_validation_scores)))
+            score.mean_validation_score,
+            np.std(score.cv_validation_scores)))
         print("Parameters: {0}".format(score.parameters))
         print("")
 
