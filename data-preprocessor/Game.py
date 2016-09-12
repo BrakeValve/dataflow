@@ -6,8 +6,13 @@ Created on Sun Aug 21 21:25:11 2016
 """
 import json
 import datetime
-import numpy as np
 import math
+
+
+def mean_var(seq):
+    m = sum(seq)/len(seq)
+    v = sum(map(lambda x: (x-m)*(x-m), seq))/len(seq)
+    return [m, v]
 
 
 class Game:
@@ -85,20 +90,16 @@ class Game:
         def extractTimeUniFeature(self):
 
             # Every day price
-            self.mean_price = np.mean(self.prices)
-            self.var_price = np.var(self.prices)
+            [self.mean_price, self.var_price] = mean_var(self.prices)
 
             # Every day origin price (msrp may decriese )
-            self.mean_org_price = np.mean(self.org_prices)
-            self.var_org_price = np.var(self.mean_org_price)
+            [self.mean_org_price, self.var_org_price] = mean_var(self.org_prices)
 
             # discount to every day
-            self.mean_discount = np.mean(self.trimmed_discounts)
-            self.var_discount = np.var(self.trimmed_discounts)
+            [self.mean_discount, self.var_discount] = mean_var(self.trimmed_discounts)
 
             # Druation of every discount
-            self.mean_duration = np.mean(self.durations)
-            self.var_duration = np.var(self.durations)
+            [self.mean_duration, self.var_duration] = mean_var(self.durations)
 
         def extractTimeRelFeature(self):
 
