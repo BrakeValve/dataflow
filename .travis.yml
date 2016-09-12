@@ -1,13 +1,17 @@
 language: python
-python:
-  - '2.7'
-  - '3.5'
+matrix:
+  include:
+    - python: 2.7
+    - python: 3.5
+
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y nodejs npm
+    - sudo apt-get -qq update
+    - sudo apt-get install -y nodejs npm
 install:
-  - npm install -g eclint
-  - pip install -r requirements.txt
+    - npm install -g eclint
+    - sudo pip install -r requirements.txt
+
 script:
-  - flake8
-  - eclint check */*.py
+    - flake8
+    - eclint check */*.py
+    - "sudo sh ./.travis/run_test.sh"
