@@ -138,7 +138,7 @@ class Game:
 
             pre_time = ""
             for line in f:
-                [timestamp, p, o_p] = map(float, line.split())
+                [timestamp, p, o_p] = map(float, line.split()[:3])
                 timestamp = datetime.datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
                 # Prevent duplicate time slots
                 if timestamp != pre_time:
