@@ -11,15 +11,30 @@ from operator import itemgetter
 from scipy.stats import randint as sp_randint
 from sklearn.grid_search import RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+
 from numpy import genfromtxt
+from optparse import OptionParser
 
 print(__doc__)
 
-train_mat = genfromtxt('training.csv', delimiter=',')
+TRAINING_OUTPUT_DIRECTORY = '../../traing_data'
+
+parser = OptionParser()
+parser.add_option("-t", dest="TRAINING_OUTPUT_DIRECTORY")
+(options, args) = parser.parse_args()
+
+if options.TRAINING_OUTPUT_DIRECTORY is not None:
+    TRAINING_OUTPUT_DIRECTORY = options.TRAINING_OUTPUT_DIRECTORY
+
+# From demonstration , we only used  4 of 5 histrical data for training
+train_mat = genfromtxt(TRAINING_OUTPUT_DIRECTORY+'/traing_matrix.csv', delimiter=',')
+# First column is the lable column
 y = train_mat[:, 0]
 X = train_mat[:, 1:]
 
-# build a classifier
+# build a classifier, in this demo we use Random Forest, you can switch to any other classifier
 clf = RandomForestClassifier(n_estimators=50)
 
 # Utility function to report best scores
@@ -49,11 +64,26 @@ n_iter_search = 20
 random_search = RandomizedSearchCV(clf, param_distributions=param_dister, n_iter=n_iter_search, n_jobs=2)
 start = time()
 random_search.fit(X, y)
+
 print("RandomizedSearchCV took %.2f s for %d candidates"" parameter settings." % ((time() - start), n_iter_search))
 
-# report(random_search.grid_scores_)
-inst = genfromtxt('instance.csv', delimiter=',')
-out = random_search.predict(inst[:, 1:])
-s = np.vstack([map(lambda x:(int(x)), inst[:, 0]), map(lambda x:(int(x)), out)]).T
-pred = map(lambda x: [str(x[0]), str(x[1])], s)
-np.savetxt("pred.csv", pred, delimiter=",", fmt="%s")
+report(random_search.grid_scores_)
+
+# Load the testing data
+test_mat = genfromtxt(TRAINING_OUTPUT_DIRECTORY+'/testing_matrix.csv', delimiter=',')
+
+test_y = test_mat[:, 0]
+test_x = test_mat[:, 1:]
+
+y_true, y_pred = test_y, random_search.predict(test_x)
+
+print ("Raw metirc result :")
+print(classification_report(y_true, y_pred))
+print('Accuracy : ' + str(accuracy_score(y_true, y_pred)))
+
+mod_y_pred = map(lambda x: x if x == 1 else -1, y_pred)
+mod_y_true = map(lambda x: x if x == 1 else -1, y_true)
+
+print ("More reasonable metirc result : ")
+print(classification_report(mod_y_true, mod_y_pred))
+print('Accuracy : ' + str(accuracy_score(mod_y_true, mod_y_pred)))

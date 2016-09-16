@@ -148,10 +148,10 @@ for g in game_set.values():
         t = datetime.datetime.strptime(target_c.times[i], '%Y-%m-%d')
         o.extend([t.month, t.day, t.weekday() + 1])
 
-        o.append('\n')
         # str() to all data
         o = map(str, o)
         o = ','.join(o)
+        o = o + '\n'
 
         # output intstance with id append
         if (i == len(target_c.times)-1):
@@ -167,6 +167,7 @@ for g in game_set.values():
                 o = '-1,' + o
 
         f.write(o)
+
         # separte testing and training data
         if (i < g.test_begin - 1):
             train_o.append(o)
