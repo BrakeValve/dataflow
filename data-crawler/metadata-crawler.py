@@ -44,6 +44,7 @@ ids = [
     u'284770', u'292030', u'34330', u'339350', u'400910',
     u'250320', u'288160'
 ]
+
 itr = 0
 attrs = ['App ID', 'App Type', 'Name', 'Developer', 'Publisher', 'Release Date']
 

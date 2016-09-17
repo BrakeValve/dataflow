@@ -13,10 +13,16 @@ import datetime
 import os
 
 
-def out_append(o, t, price, o_price):
-    o.append(' '.join(datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d"), str(t), str(price), str(o_price)) + '\n')
+def days(t):
+    return datetime.datetime.fromtimestamp(t).day
 
-OUTPUT_DIRECTORY = '../../new_price_data'
+
+def out_append(o, t, price, o_price):
+    t = int(t)
+    string = ' '.join([str(t),  str(price), str(o_price), datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H")])
+    o.append(string + '\n')
+
+OUTPUT_DIRECTORY = '../../price_data'
 
 parser = OptionParser()
 parser.add_option("-o", dest="OUTPUT_DIRECTORY")
@@ -50,10 +56,13 @@ ids = [
     '8930', '9420'
 ]
 
-ids = ['620']
+# ids = ['261570']
+
 
 country = ['us', 'br', 'ca', 'eu', 'kr', 'mx', 'nz', 'sg', 'tr', 'uk']
-country = ['us']
+
+# country = ['sg']
+
 for c in country:
     if not os.path.exists(OUTPUT_DIRECTORY+'/'+c):
         os.makedirs(OUTPUT_DIRECTORY+'/'+c)
@@ -64,8 +73,27 @@ for cc in country:
         print('Parse APP No.  ' + appid + ' ' + cc)
         # Random sleep for a few seconds to simulate human query
         # time.sleep(randint(1,5))
+
+        nowTime = time.time()
+
+        f_name = OUTPUT_DIRECTORY+'/'+cc+'/new_app_'+cc+'_'+appid+'.txt'
+        last = ''
+        if os.path.isfile(f_name):
+            # if previous data is exist, read through the file to find the last data point
+            with open(f_name, 'r') as f:
+                for line in f:
+                    pass
+                last = line
+            lastline = last.split()
+            lastTimeOfFile = int(lastline[0])
+            if(days(lastTimeOfFile) == days(nowTime)):
+
+                print(appid + ' ' + cc + ' is already up to date.')
+                continue
+
         response = requests.get("https://steamdb.info/api/GetPriceHistory/?appid=" + appid + "&cc=" + cc)
         if response.status_code == 200:
+            print 'Crawler requert success! '
             cont = json.loads(response.content)
             if cont['success'] is True:
                 result = cont['data']['final']
@@ -73,25 +101,17 @@ for cc in country:
                 out = []
                 l = len(result)
                 if l > 0:
-                    last = ''
-                    f_name = OUTPUT_DIRECTORY+'/'+cc+'/new_app_'+cc+'_'+appid+'.txt'
-                    if os.path.isfile(f_name):
-                        # if previous data is exist, read through the file to find the last data point
-                        with open(f_name, 'r') as f:
-                            for line in f:
-                                pass
-                            last = line
-                        # Append the new data point
                     with open(f_name, 'a+') as f:
+                        # Append the new data point
                         if last == '':
                             lastline = []
                             lastline.extend(result[0])
                             lastline.append(init[0][1])
+                            lastTime = int(lastline[0])/1000
                             out_append(out, int(lastline[0]/1000), lastline[1], lastline[2])
                         else:
                             lastline = last.split()
-
-                        lastTime = int(lastline[0]/1000)
+                            lastTime = int(lastline[0])
 
                         for ptr in range(l):
                             if result[ptr][0]/1000 > lastTime:
@@ -115,17 +135,21 @@ for cc in country:
                             ed = result[l - 1]
                             ed_init = init[l - 1]
                             edTime = ed[0] / 1000
-                            nowTime = time.time()
+
                             while edTime < nowTime:
                                 out_append(out, edTime, ed[1], ed_init[1])
                                 edTime = edTime + 86400
-                            out_append(out, nowTime, ed[1], ed_init[1])
+                            if(days(edTime - 86400) != days(nowTime)):
+                                out_append(out, nowTime, ed[1], ed_init[1])
                         else:
                             nowTime = time.time()
                             lastTime = lastTime + 86400
                             while lastTime < nowTime:
                                 out_append(out, lastTime, lastline[1], lastline[2])
                                 lastTime = lastTime + 86400
-                            out_append(out, nowTime, lastline[1], lastline[2])
+                            if(days(lastTime - 86400) != days(nowTime)):
+                                out_append(out, nowTime, lastline[1], lastline[2])
 
                         f.write(''.join(out))
+        else:
+            print 'Something wrong! Status code : ' + response.status_code
