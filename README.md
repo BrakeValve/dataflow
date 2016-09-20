@@ -1,5 +1,5 @@
 # BrakeValve Dataflow
-[![Build Status](https://travis-ci.org/BrakeValve/brake-valve-server.svg?branch=master)](https://travis-ci.org/BrakeValve/brake-valve-server)
+[![Build Status](https://travis-ci.org/BrakeValve/dataflow.svg?branch=master)](https://travis-ci.org/BrakeValve/dataflow)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://en.wikipedia.org/wiki/MIT_License)
 > Help you think twice and make wise choices on Steam
 
