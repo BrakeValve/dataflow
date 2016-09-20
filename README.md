@@ -6,3 +6,23 @@
 BrakeValve is a Chrome extension to help Steam buyers making decision on purchasing games. We use novel feature extraction techniques to gain knowledge and insight from the Steam historical data and combined with a robust predictor to achieve over 80% accuracy and F-score.
 
 Click [here](https://brakevalve.github.io/) to see more implementation detail.
+
+## Project Preview
+
+``` markdown
+dataflow/
+│ 
+├── data-crawler/                        
+│   ├── historical-price-crawler.py      # Steam price crawler using SteamDB API
+│   └── metadata-crawler.py              # Steam metadata crawler using SteamDB API
+├── data-preprocessor/                   
+│   ├── Game.py                          # Steam Game Object
+│   ├── listFile.py                      # file utils
+│   └── preprocessor.py                  # preprocessing main fuction
+└─── model/
+    └── random-forest-model.py           # training demo using random forest model from sklearn
+```
+## Dependencies
+
+- beautifulsoup4
+- requests
