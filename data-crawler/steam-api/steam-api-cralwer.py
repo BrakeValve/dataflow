@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
-# TODO: Ignore list
-# TODO: If we got 429 error, wait some time then re-try
-
 from argparse import ArgumentParser
 import os
-import requests
 import sys
 import json
 import time
-import datetime
+
+from util import log_info, log_warning, log_debug, ensure_path, retrieve_data
+from util import get_last_line, time_to_str, time_to_day, time_to_sec
+from util import APP_LIST_URL, APP_URL_PREFIX, APPS_PER_REQUEST
 
 # === Constants ===
-APP_LIST_URL = "http://api.steampowered.com/ISteamApps/GetAppList/v0001/"
-APP_URL_PREFIX = "http://store.steampowered.com/api/appdetails?appids="
 APP_ATTRS = [
     # "type",
     "name",
@@ -51,54 +48,23 @@ APP_ATTRS = [
 TARGET_COUNTRY = ["us", "br", "ca", "eu", "kr", "mx", "nz", "sg", "tr", "uk", "tw"]
 START_TIME = time.time()
 
+
 # === Predefined functions ===
 
 
-def log_warning(msg):
-    print("[WARNING] %s" % msg)
+def read_ignore_list(path):
+    apps = []
 
-
-def log_info(msg):
-    print("[INFO] %s" % msg)
-
-
-def log_debug(msg):
-    print("[DEBUG] %s" % msg)
-
-
-def ensure_path(path):
     if not os.path.exists(path):
-        print("Can't not find output directory '%s', Create a new one" % path)
-        os.makedirs(path)
+        log_warning("Can't not find the ignore list at '%s'" % path)
+        return apps
 
-
-def retrieve_data(url):
-    response = requests.get(url)
-
-    if response.status_code / 100 > 2:
-        print("Something wrong with '%s'" % url)
-        print("Response code: %d" % response.status_code)
-        return None
-
-    return json.loads(response.content)
-
-
-def get_last_line(file_path):
-    with open(file_path, 'r') as f:
+    with open(path, 'r') as f:
         for line in f:
-            pass
-    return line
+            app_id = line.split(' ')[0]
+            apps.append(int(app_id))
 
-def time_to_str(t):
-    return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H")
-
-
-def time_to_day(t):
-    return datetime.datetime.fromtimestamp(t).day
-
-
-def time_to_sec(t):
-    return datetime.datetime.fromtimestamp(t).second
+    return apps
 
 
 # === Read the argument for the output path ===
@@ -110,6 +76,7 @@ parser.add_argument("-m", "--re-meta", help="re-download exsiting metadata", act
 args = parser.parse_args()
 
 path = "./data"
+ignore_file = "./ignore_apps.txt"
 if args.out is None:
     log_info("Didn't specify the output path. Use the default one: %s" % path)
 else:
@@ -119,6 +86,7 @@ if args.debug:
     log_debug("Debug mode enabled")
 if args.re_meta:
     log_info("Redownload all metadata")
+
 
 # === Ensure the path to the output directories
 meta_dir_path = path + "/metadata"
@@ -150,8 +118,25 @@ elif args.num is not None:
     if count < len(apps):
         apps = apps[:count]
 
-# == Retrieve the metadata ==
+# Remove the ignored applications
+ignores = read_ignore_list(ignore_file)
+new_list = []
 for (app_id, app_name) in apps:
+    if app_id in ignores:
+        if args.debug:
+            log_debug("Ignore %s (id: %d)" % (app_name, app_id))
+        continue
+
+    new_list.append((app_id, app_name))
+log_info("There are %d apps ignored" % (len(apps) - len(new_list)))
+apps = new_list
+
+
+# == Retrieve the metadata ==
+count = 0
+down_count = 0
+for (app_id, app_name) in apps:
+    count += 1
 
     file_path = meta_dir_path + "/app_meta_" + str(app_id) + ".json"
 
@@ -160,8 +145,11 @@ for (app_id, app_name) in apps:
         continue
 
     # Downloads the json data
-    data = retrieve_data(APP_URL_PREFIX + str(app_id))
-    if data[str(app_id)]["success"] == False:
+    data = retrieve_data(APP_URL_PREFIX + str(app_id) + "&cc=us")
+    if data is None:
+        continue
+
+    if data[str(app_id)]["success"] is False:
         log_warning("Failed to retrieve the data for '%s' (id: %d)" % (app_name, app_id))
         continue
     data = data[str(app_id)]["data"]
@@ -176,6 +164,11 @@ for (app_id, app_name) in apps:
     with open(file_path, "w") as f:
         f.write(json.dumps(new_data))
 
+    down_count += 1
+    if down_count % 10 == 0:
+        log_info("%d applications' metadata remained to be checked" % (len(apps) - count))
+
+
 # == Retrieve the prices for the target countries ==
 for cc in TARGET_COUNTRY:
     cc_dir = price_dir_path + "/" + cc
@@ -188,11 +181,11 @@ for cc in TARGET_COUNTRY:
 
         log_info("There are %d apps left" % len(rest_apps))
 
-        # Retrieve the first 100 apps
+        # Retrieve the first {APPS_PER_REQUEST} apps
         this_time_apps = []
         next_time_apps = []
         for (app_id, app_name) in rest_apps:
-            if len(this_time_apps) < 100:
+            if len(this_time_apps) < APPS_PER_REQUEST:
                 # Check if we have the price data for this app today
                 file_path = cc_dir + "/app_price_" + str(app_id) + ".txt"
                 if os.path.exists(file_path):
@@ -212,13 +205,15 @@ for cc in TARGET_COUNTRY:
         url = APP_URL_PREFIX
         for (app_id, _) in this_time_apps:
             url += str(app_id) + ','
-        url = url[:-1] # Remove the last ','
+        url = url[:-1]  # Remove the last ','
         url += "&cc=" + cc + "&filters=price_overview"
         data = retrieve_data(url)
+        if data is None:
+            continue
 
         # Save the price of the data to the file
         for (app_id, app_name) in this_time_apps:
-            if data[str(app_id)]["success"] == False:
+            if data[str(app_id)]["success"] is False:
                 log_warning("Failed to retrieve the price data for '%s' (id: %d)" % (app_name, app_id))
             else:
                 # Check if it has price data
