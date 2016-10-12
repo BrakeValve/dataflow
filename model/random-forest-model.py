@@ -29,7 +29,7 @@ if options.TRAINING_INPUT_DIRECTORY is not None:
     TRAINING_INPUT_DIRECTORY = options.TRAINING_INPUT_DIRECTORY
 
 # From demonstration , we only used  4 of 5 histrical data for training
-train_mat = genfromtxt(TRAINING_INPUT_DIRECTORY+'/traing_matrix.csv', delimiter=',')
+train_mat = genfromtxt(TRAINING_INPUT_DIRECTORY+'/training_matrix.csv', delimiter=',')
 # First column is the lable column
 y = train_mat[:, 0]
 X = train_mat[:, 1:]
