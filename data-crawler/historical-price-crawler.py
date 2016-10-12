@@ -93,7 +93,7 @@ for cc in country:
 
         response = requests.get("https://steamdb.info/api/GetPriceHistory/?appid=" + appid + "&cc=" + cc)
         if response.status_code == 200:
-            print 'Crawler requert success! '
+            print('Crawler requert success!')
             cont = json.loads(response.content)
             if cont['success'] is True:
                 result = cont['data']['final']
@@ -152,4 +152,4 @@ for cc in country:
 
                         f.write(''.join(out))
         else:
-            print 'Something wrong! Status code : ' + response.status_code
+            print('Something wrong! Status code : ' + response.status_code)
