@@ -5,6 +5,7 @@ import os
 import sys
 import json
 import time
+import io
 
 from util import log_info, log_warning, log_debug, ensure_path, retrieve_data
 from util import get_last_line, time_to_str, time_to_day, time_to_sec
@@ -59,7 +60,7 @@ def read_ignore_list(path):
         log_warning("Can't not find the ignore list at '%s'" % path)
         return apps
 
-    with open(path, 'r') as f:
+    with io.open(path, 'r', encoding='utf8') as f:
         for line in f:
             app_id = line.split(' ')[0]
             apps.append(int(app_id))
@@ -192,7 +193,7 @@ for cc in TARGET_COUNTRY:
                     last_line = get_last_line(file_path)
                     time_str = last_line.split(' ')[0]
 
-                    if time_to_day(long(time_str)) == time_to_day(START_TIME):
+                    if time_to_day(int(time_str)) == time_to_day(START_TIME):
                         continue
 
                 this_time_apps.append((app_id, app_name))
@@ -218,7 +219,7 @@ for cc in TARGET_COUNTRY:
             else:
                 # Check if it has price data
                 if "price_overview" not in data[str(app_id)]["data"]:
-                    log_info("App '%s' (id: %d) is free." % (app_name, app_id))
+                    log_fine("App '%s' (id: %d) is free." % (app_name, app_id))
                     continue
 
                 # Retrieve the price
@@ -233,4 +234,4 @@ for cc in TARGET_COUNTRY:
 
 
 # == Finish ==
-log_info("Finished. It takes %d seconds totally." % time_to_sec(time.time() - START_TIME))
+log_info("Finished. It takes %f seconds totally." % (time.time() - START_TIME))

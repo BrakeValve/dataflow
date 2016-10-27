@@ -18,15 +18,19 @@ APPS_PER_REQUEST = 200  # The length of URL should be under 2000 characters
 
 
 def log_warning(msg):
-    print("\033[91m[WARNING] %s\033[0m" % msg)
+    print("\033[93m[WARNING] %s\033[0m" % msg.encode())
 
 
 def log_info(msg):
-    print("[INFO] %s" % msg)
+    print("[INFO] %s" % msg.encode())
+
+
+def log_fine(msg):
+    print("\033[92m[FINE] %s\033[0m" % msg.encode())
 
 
 def log_debug(msg):
-    print("\033[93m[DEBUG] %s\033[0m" % msg)
+    print("\033[94m[DEBUG] %s\033[0m" % msg.encode())
 
 
 def ensure_path(path):
@@ -54,7 +58,7 @@ def retrieve_data(url):
         response = requests.get(url)
         # TODO: Maximum retrying times
 
-    return json.loads(response.content)
+    return response.json()
 
 
 def get_last_line(file_path):
