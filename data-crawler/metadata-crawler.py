@@ -13,6 +13,19 @@ import os
 
 OUTPUT_DIRECTORY = '../../new_meta'
 
+
+def pruned_list(original_list):
+    return list(filter(lambda x: x.strip() != '', original_list))
+
+
+def load_list(url):
+    response = requests.get(url)
+    return pruned_list(response.text.split('\n'))
+
+
+def load_ids():
+    return load_list('https://raw.githubusercontent.com/BrakeValve/data/apps/apps')
+
 parser = OptionParser()
 parser.add_option("-o", dest="OUTPUT_DIRECTORY")
 (options, args) = parser.parse_args()
@@ -24,26 +37,7 @@ if not os.path.exists(OUTPUT_DIRECTORY):
     print("Can't not find output directory, Create a new one")
     os.makedirs(OUTPUT_DIRECTORY)
 
-ids = [
-    u'433950', u'391540', u'237930', u'367580', u'620',
-    u'205100', u'322170', u'342560', u'420110', u'13240',
-    u'24960', u'400', u'250900', u'341800', u'224820',
-    u'231160', u'9420', u'238460', u'373770', u'368340',
-    u'213670', u'427520', u'35140', u'242680', u'238320',
-    u'219740', u'316720', u'32150', u'413150', u'251370',
-    u'107100', u'293780', u'55230', u'319630', u'113200',
-    u'102600', u'279800', u'280220', u'370360', u'428550',
-    u'360740', u'236090', u'220200', u'221640', u'35720',
-    u'13230', u'3590', u'212680', u'70400', u'227000',
-    u'431730', u'261570', u'206190', u'206440', u'18500',
-    u'264200', u'214560', u'322330', u'48700', u'220',
-    u'10', u'219150', u'413410', u'8930', u'266010',
-    u'265610', u'204360', u'282070', u'550', u'274190',
-    u'236930', u'247080', u'413420', u'218410', u'105600',
-    u'207610', u'227300', u'49520', u'324160', u'411960',
-    u'284770', u'292030', u'34330', u'339350', u'400910',
-    u'250320', u'288160'
-]
+ids = load_ids()
 
 itr = 0
 attrs = ['App ID', 'App Type', 'Name', 'Developer', 'Publisher', 'Release Date']
@@ -63,7 +57,7 @@ for appid in ids:
         if(rows[3].string != 'Downloadable Content'):
             print("Parse APP: " + appid + " No " + str(itr))
             for a in attrs:
-                for j in range(len(rows)/2):
+                for j in range(int(len(rows)/2)):
                     attr = str(rows[2*j]).replace(">", "#").replace("<", "#").split("#")[2]
 
                     if attr == a:

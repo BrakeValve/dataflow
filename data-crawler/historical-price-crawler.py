@@ -22,6 +22,24 @@ def out_append(o, t, price, o_price):
     string = ' '.join([str(t),  str(price), str(o_price), datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d-%H")])
     o.append(string + '\n')
 
+
+def pruned_list(original_list):
+    return list(filter(lambda x: x.strip() != '', original_list))
+
+
+def load_list(url):
+    response = requests.get(url)
+    return pruned_list(response.text.split('\n'))
+
+
+def load_ids():
+    return load_list('https://raw.githubusercontent.com/BrakeValve/data/apps/apps')
+
+
+def load_regions():
+    return load_list('https://raw.githubusercontent.com/BrakeValve/data/apps/regions')
+
+
 OUTPUT_DIRECTORY = '../../price_data'
 
 parser = OptionParser()
@@ -35,33 +53,9 @@ if not os.path.exists(OUTPUT_DIRECTORY):
     print("Can't not find output directory, Create a new one")
     os.makedirs(OUTPUT_DIRECTORY)
 
-ids = [
-    '10', '102600', '105600', '107100', '113200',
-    '13230', '13240', '18500', '204360', '205100',
-    '206190', '206440', '207610', '212680', '213670',
-    '214560', '218410', '219150', '219740', '220',
-    '220200', '221640', '224820', '227000', '227300',
-    '231160', '236090', '236930', '237930', '238320',
-    '238460', '242680', '247080', '24960', '250320',
-    '250900', '251370', '261570', '264200', '265610',
-    '266010', '274190', '279800', '280220', '282070',
-    '284770', '288160', '292030', '293780', '316720',
-    '319630', '32150', '322170', '322330', '324160',
-    '339350', '341800', '342560', '34330', '35140',
-    '35720', '3590', '360740', '367580', '368340',
-    '370360', '373770', '391540', '400', '400910',
-    '411960', '413150', '413410', '413420', '420110',
-    '427520', '428550', '431730', '433950', '48700',
-    '49520', '550', '55230', '620', '70400',
-    '8930', '9420'
-]
 
-# ids = ['261570']
-
-
-country = ['us', 'br', 'ca', 'eu', 'kr', 'mx', 'nz', 'sg', 'tr', 'uk']
-
-# country = ['sg']
+ids = load_ids()
+country = load_regions()
 
 for c in country:
     if not os.path.exists(OUTPUT_DIRECTORY+'/'+c):
@@ -94,7 +88,7 @@ for cc in country:
         response = requests.get("https://steamdb.info/api/GetPriceHistory/?appid=" + appid + "&cc=" + cc)
         if response.status_code == 200:
             print('Crawler requert success!')
-            cont = json.loads(response.content)
+            cont = json.loads(response.text)
             if cont['success'] is True:
                 result = cont['data']['final']
                 init = cont['data']['initial']
@@ -152,4 +146,4 @@ for cc in country:
 
                         f.write(''.join(out))
         else:
-            print('Something wrong! Status code : ' + response.status_code)
+            print('Something wrong! Status code : ' + str(response.status_code))
