@@ -310,8 +310,6 @@
 25840  # Take Command: Second Manassas
 25880  # Elven Legacy - Demo
 25920  # Sword of the Stars: Argos Naval Yard Expansion
-25930  # East India Company
-25940  # East India Company: Pirate Bay
 26100  # Noesis - Realtime Character Animation with Softimage
 26110  # Noesis - Source Vehicle Scripting
 26120  # Noesis - Intro to Source Vehicle Programming
@@ -340,7 +338,7 @@
 29630  # Guild Wars: Nightfall
 29660  # Aion
 29670  # Aion Collectors Edition
-29680  # City of Heroes: Going Rogue
+29680  # City of Heroes: Going Rogue 
 29690  # City of Heroes: Going Rogue EU
 29710  # Guild Wars: Eye of the North (EU)
 30000  # Tom Bui Test App
@@ -433,8 +431,6 @@
 42720  # Call of Duty Black Ops - Remote Console
 42740  # Call of Duty Black Ops - Mod Tools (BETA)
 42750  # Call of Duty: Modern Warfare 3 - Dedicated Server
-42800  # East India Company: Privateer
-42820  # East India Company: Battle of Trafalgar
 42830  # Achtung Panzer - Kharkov 1943
 42840  # Majesty 2 - Spell: Song of Pain
 42860  # Majesty 2 - Mystic Missions Pack
@@ -476,7 +472,7 @@
 50470  # Mafia II Pre-order
 50830  # Max and the Magic Marker - Demo
 50900  # Professor FizzWhizzle
-51040  # Fairway Solitaire
+51040  # Fairway Solitaire 
 55130  # HOMEFRONT Demo
 55180  # HOMEFRONT [Dev]
 55190  # HOMEFRONT [Alpha]
@@ -486,7 +482,7 @@
 55290  # Homefront Dedicated Server [Japanese]
 56460  # Warhammer® 40,000®: Dawn of War® II – Retribution™ Beta
 56490  # ValveTestApp56490
-57310  # Amnesia: The Dark Descent Demo
+57310  # Amnesia: The Dark Descent Demo 
 57500  # All Points Bulletin
 57510  # All Points Bulletin
 57630  # Patrician IV - Demo
@@ -494,7 +490,7 @@
 57910  # Duke Nukem Forever Dedicated Server
 57920  # SampleDLC
 57940  # Duke Nukem Forever Demo
-57970  # Duke Nukem Forever
+57970  # Duke Nukem Forever 
 57980  # Duke's Big Package RU
 58300  # System Protocol One
 58310  # System Protocol One Demo
@@ -768,6 +764,7 @@
 210410  # Max Payne 2 DE
 210430  # Max Payne 2 IT
 210450  # Civilization V: Gods & Kings Mac
+210990  # Pro Cycling Manager 2012
 211000  # Pro Cycling Manager 2012 DLC 2
 211050  # Battle vs Chess
 211120  # The Political Machine
@@ -845,6 +842,7 @@
 219360  # X-Com: Enemy Unknown UNUSED
 219540  # Arma 2: Operation Arrowhead Beta (Obsolete)
 219720  # Dynamite Jack Demo
+219800  # Pro Cycling Manager 2013
 219870  # Football Superstars
 220050  # The Walking Dead™: Survival Instinct
 220070  # Chivalry: Medieval Warfare Dedicated Server
@@ -892,7 +890,7 @@
 224320  # Uncharted Waters Online
 224360  # Ice Age™: Continental Drift: Arctic Games
 224420  # Afterfall InSanity Extended Edition
-224560  # EverQuest II: Chains of Eternity
+224560  # EverQuest II: Chains of Eternity 
 224620  # Primal Carnage Dedicated Server
 224780  # Rising Storm Beta
 224800  # iBomber Attack Demo
@@ -992,6 +990,7 @@
 238670  # Day Of Defeat Content Pack
 238690  # Rising Storm Beta Dedicated Server
 238710  # Substance Designer 4
+239220  # The Mighty Quest For Epic Loot
 239240  # Knights of Pen and Paper - Pre-Order DLC
 239280  # Uncharted Waters Onilne: Steam Voyager's Limited Edition
 239390  # War for the Overworld - Kickstarter Backer Content (Kickstarter)
@@ -1095,7 +1094,7 @@
 247930  # Sniper Elite: Zombie Army 2
 248950  # The Mighty Quest For Epic Loot Test Zone
 249070  # Tom Clancy's Splinter Cell Blacklist Standard Edition
-249700  # Urban Trial Freestyle Special Rider Suit DLC
+249700  # Urban Trial Freestyle Special Rider Suit DLC 
 249740  # Might & Magic X - Legacy Digital Deluxe Content
 249750  # DC Universe Online - Sons of Trigon
 249760  # EverQuest: Call of the Forsaken
@@ -1108,6 +1107,7 @@
 251970  # Sins of a Dark Age
 252990  # Warframe: Initiate Pack
 253470  # Real World Racing
+253830  # Pro Starter Pack
 254000  # East India Company Gold
 254020  # Commander: Conquest of the Americas Gold
 254040  # Pirates of Black Cove Gold
@@ -1117,6 +1117,7 @@
 254270  # Dungeonland - All access pass
 254420  # Cognition - Episode 1
 254620  # Ironclad Tactics: Deluxe Edition
+254650  # Warhammer 40,000: Storm of Vengeance
 254670  # Shadow Warrior: Zilla Prototype Katana DLC
 254980  # Silent Storm Sentinels
 255000  # Rise of Venice: Steamship DLC
@@ -1155,7 +1156,7 @@
 259360  # Chicken Shoot 2
 260300  # Community Faceplate
 260310  # Company of Heroes 2 - German Commander: Close Air Support Doctrine
-260320  # Company of Heroes 2 - OKW Skin: (H) Rotbraun Ambush Pattern with Winter Frost
+260320  # Company of Heroes 2 - OKW Skin: (H) Rotbraun Ambush Pattern with Winter Frost 
 260400  # Chunk of Change Knight
 260460  # Rocksmith 2014 - Game Key
 260770  # Neighbours from Hell 2
@@ -1240,6 +1241,7 @@
 273390  # Substance Painter
 273480  # Might & Magic X - Legacy Game Key
 273490  # Might & Magic X - Legacy Deluxe Game Key
+273520  # Pinball FX2 - Super League - A.C. Milan Table
 273530  # Centration Dedicated Server
 273550  # Terrain Test
 273570  # Descent
@@ -1295,7 +1297,6 @@
 285620  # MC6T - Cakewalk Expansion Pack - Urban
 285630  # MC6T - Cakewalk Expansion Pack - Video Game Sound Designer Sci-Fi Ambient Machines
 286640  # HAWKEN - Initiate Bundle
-286940  # S.K.I.L.L. - Special Force 2
 287280  # Substance Indie Pack - Free DLC
 287360  # Dark Souls II - Pre-Order DLC JP
 287410  # Trials Fusion - Standard Edition
@@ -1327,6 +1328,7 @@
 291540  # Tom Clancy's Ghost Recon Phantoms - EU: Assault Arctic Pack
 291820  # Tom Clancy's Ghost Recon Phantoms - NA: Collector's Pack (Assault)
 291830  # Tom Clancy's Ghost Recon Phantoms - EU: Collector's Pack (Assault)
+292470  # Warhammer 40,000: Storm of Vengeance: Deathwing Terminator
 292640  # Flockers Editor
 292680  # Princess Isabella - Rise of an Heir
 292750  # (Depreciated)
@@ -1385,7 +1387,6 @@
 301480  # GEARCRACK Arena
 301820  # Landmark - Buddy Beta Copy
 301890  # NARUTO SHIPPUDEN: Ultimate Ninja STORM Revolution - DLC 1 Samurai Armor Pack
-302450  # Van Helsing II: Magic Pack
 302530  # Assetto Corsa SDK
 302550  # Assetto Corsa Dedicated Server
 303740  # Rebuild: Original Rebuild 1
@@ -1584,6 +1585,7 @@
 330030  # The Mighty Quest For Epic Loot - Halloween Pack
 330040  # Alone in the Dark: Illumination - Eldritch Edition
 330140  # Test Project
+330210  # Asteroids: Outpost
 330340  # Total War: Rome II – Massilia Faction
 330360  # Dizzel - Vedette's Killer Care Package
 330380  # Kingdom Wars - Dawn of Fantasy: Kingdom Wars Game Key
@@ -1657,6 +1659,7 @@
 338510  # WARMACHINE: Tactics - Mercenaries: Gorman Di Wulfe
 338520  # WARMACHINE: Tactics - Mercenaries: Eiryss, Mage Hunter of Ios
 338590  # The Race for the White House
+338600  # CyberLink PowerDVD 15 Ultra
 338720  # Warframe: Honor Pack
 338740  # Savage Goliath Skin
 338920  # Battle vs Chess - Dark Desert DLC
@@ -1767,7 +1770,7 @@
 357160  # ArcheAge: Silver Secrets Pack
 357210  # Down Loadable Content
 357820  # Might & Magic: Duel of Champions - Time of Renewal Pack
-357850  # Fractured Space - Vanguard
+357850  # Fractured Space - Vanguard 
 357980  # Might & Magic: Duel of Champions - Starter Pack
 358430  # Balls of Steel
 358480  # DarkBase 01
@@ -1818,6 +1821,7 @@
 365180  # Ogrest - La Légende
 365920  # Act of Aggression Press Review
 366150  # Jensen Story: Desperate Measures
+366400  # Dead Star
 366490  # VRMonitor
 366840  # Call of Duty: Black Ops III - Campaign
 366850  # Call of Duty: Black Ops III - Digital Personalization Pack
@@ -1850,10 +1854,11 @@
 371260  # Omega Jam
 371440  # Journey Of The Light - Remake
 371600  # F1 Chequered Flag
-371840  # Company of Heroes 2 - USF - Forward Assault Company
+371840  # Company of Heroes 2 - USF - Forward Assault Company 
 372370  # Brawlhalla - White Fang Gnash
 372630  # Might & Magic Heroes VII: Beta - Uplay Activation
 372900  # Project CARS - Logitech Liveries
+372920  # DOMO - Summer is Here! (Male) DLC
 373030  # Dota 2 - Short Film Contest 2015
 373080  # Instinct
 373100  # Wrath of Athena
@@ -1877,6 +1882,7 @@
 376050  # FINAL FANTASY XIV Online (NA)
 376070  # FINAL FANTASY XIV Online (JP)
 376090  # FINAL FANTASY XIV Online (PAL)
+376280  # Faceted Flight Demo
 376540  # Might & Magic Heroes VII: Beta additional - Uplay Activation
 376610  # Toukiden: Kiwami - Armor - Sōma Outfit & Reki Outfit
 376670  # Vortex Attack Demo
@@ -2021,6 +2027,23 @@
 400460  # Kopanito All-Stars Soccer Demo
 400480  # NBA 2K16 Pre-Order VC for JP
 400690  # SEGA Genesis & Mega Drive Classics Workshop Tool
+400850  # Disney Infinity 3.0 - Yoda
+400890  # Disney Infinity 3.0 - Twilight Play Set Starter Pack
+400900  # Disney Infinity 3.0 - Anakin
+400920  # Disney Infinity 3.0 - Chewbacca
+400930  # Disney Infinity 3.0 - Sadness
+400960  # Disney Infinity 3.0 - Mickey and Friends Character Pack
+400980  # Disney Infinity 3.0 - SciFi Pack
+400990  # Disney Infinity 3.0 - Disney Defense Pack
+401000  # Disney Infinity 3.0 - The Force Awakens Character Pack
+401010  # Disney Infinity 3.0 - Black Widow
+401020  # Disney Infinity 3.0 - Gamora
+401030  # Disney Infinity 3.0 - Baymax
+401040  # Disney Infinity 3.0 - Disney Originals (2.0 Edition) Character Pack
+401050  # Disney Infinity 3.0 - Davy Jones
+401060  # Disney Infinity 3.0 - Jessie
+401070  # Disney Infinity 3.0 - Crystal Mr. Incredible
+401080  # Disney Infinity 3.0 - Medium Sparks Pack
 401340  # t-シャツ　『Joshin』コラボ
 401530  # Dota 2 - OpenGL support for Windows
 401540  # Skyshine's Bedlam KS Bobblehead
@@ -2205,6 +2228,7 @@
 435110  # Dying Light: Outfit and Livery 1
 435160  # NARUTO SHIPPUDEN: Ultimate Ninja STORM 4 - Traditional Festival Costume
 435330  # Evolve Founder
+435890  # Orcs Must Die! Unchained - Action Hero Pack
 436350  # Spellblast
 437410  # Bombshell Soundtrack
 437510  # Ben 10 Game Generator 5D
@@ -2224,7 +2248,7 @@
 439130  # FSX Samsø Configuration Tool
 439150  # FSX Sønderborg Configuration Tool
 439170  # FSX Sindal Configuration Tool
-439240  # LEGO® Star Wars™: The Force Awakens - Deluxe Edition
+439240  # LEGO® Star Wars™: The Force Awakens - Deluxe Edition 
 439360  # First Assault - Public Security Pack
 439400  # Legends of Callasia Demo
 439410  # Chun-Li Battle Costume - Pre-purchase bonus
@@ -2259,6 +2283,7 @@
 445730  # Watch paint dry
 445900  # Hurtworld SDK
 446690  # 7 Assassins
+446740  # Orcs Must Die! Unchained - Classic Pack
 447260  # XSplit Broadcaster
 447660  # ChessBase 13 Pro - Weekly Games Update
 447680  # Stellaris: Symbols of Domination
@@ -2270,26 +2295,32 @@
 449970  # Old Book of Demons
 450010  # Robocraft - Big Birthday Bundle
 450770  # Battlefleet Gothic: Armada (Press)
+450880  # RIFT: Storm Legion Pack
 450980  # Ultimate Arena - Dedicated Server
 451280  # Founder's Server : Exclusive Access 2
 451320  # Founder's Server : Exclusive Access 3
 451370  # GameGuru - Easter Game
+451440  # Ordo Robots Pilot Portrait and Ship Paint Pack
 451460  # SONAR - Cakewalk Studio Instruments
 451580  # SONAR - Overloud TH2
+451820  # End Of The Mine Demo
 452040  # GameLoading: Beta The Robot
 452190  # SONAR - Extended Loop Content
 452200  # Deadbreed® – Super Silver Value Pack
+452250  # RIFT: Planetouched Wilds Pack
 452430  # Founder's Server : Exclusive Access 1
 453150  # BattleBorn Pre-Order: Firstborn Pack
-453190  # PITCH-HIT : RAMPAGE DEMO
+453190  # OLD PITCH-HIT (GET NEW IN STORE)
 453410  # First Assault - Super Cybernetic Starter Pack
 453420  # Formicide Dedicated Server
 453490  # Danganronpa 2: Goodbye Despair Mini-OST
+453630  # Orcs Must Die! Unchained - Ultimate Pack
 455130  # Call of Duty: Black Ops III – Mod Tools
 455360  # Battleborn: Digital Deluxe extras
 455380  # DARK SOULS™ III - Original Soundtrack
 455580  # Rainbow Six Siege - Esport bundle Pro League S1 Full Set
 455610  # Orcs Must Die! Unchained - Brave Hero Box
+456370  # RIFT: Ascended Soul DLC
 456820  # Master of Orion: Terran Khanate
 457360  # NOBUNAGA'S AMBITION: Souzou SR - “SengokuBushouRetsuden”
 457930  # Starship: Nova Strike
@@ -2310,6 +2341,7 @@
 463690  # Total War™: WARHAMMER® - Assembly Kit BETA
 465680  # Wicce ~ Original Sound Track~
 468020  # Master of Orion: Soundtrack & Score
+470290  # Atlas Reactor - Atlas Edition
 471230  # Dead by Daylight: BETA
 471420  # Zero Escape: Zero Time Dilemma - Mini-OST
 471520  # Zero Escape: Zero Time Dilemma - Bonus Pamphlet
@@ -2347,10 +2379,12 @@
 487840  # FSX: Steam Edition Herning Airport Tool
 487860  # FSX Randers Configuration Tool
 487880  # FSX Tunø Configuration Tool
+487900  # FSX: Steam Edition - Tool 7
 488000  # Robotpencil Presents: Painting with Confidence - Part 2 - Files
 488980  # Trials of the Blood Dragon - WW Uplay Activation
 489980  # Dead by Daylight: Deluxe Edition
 490500  # Zero G Arena dedicated server
+490830  # Chamber 19 Demo
 491250  # The Decimation of Olarath
 491320  # Void Destroyer 2 Demo
 491460  # Gnarltoof's Revenge - Medieval Times Music Player
@@ -2374,6 +2408,8 @@
 493970  # Homebrew Vehicle Sandbox - Dedicated Server
 494770  # FIREFIGHT RELOADED Dedicated Server
 494880  # First Assault - Starter Supply Crate
+496330  # DOMO - Summer is Here! (Female) DLC
+496840  # XunYouInt迅游国际网游加速器
 497140  # Worms WMD - All Stars
 497840  # SeanJ Testing Series: Getting Started
 497960  # Legends of Callasia Demo
@@ -2383,21 +2419,27 @@
 499450  # The Witcher 3: Wild Hunt - Game of the Year Edition
 499530  # X-Plane 10 AddOn - JustFlight - Air Hauler
 500410  # SONAR Theme Editor
+502580  # WAKFU - Summer Pack 2016
+502790  # Dungeon Fighter Online: Cosmetic Pack
+503380  # Dungeon Fighter Online: The Legacy Pack
 504270  # Conception II Mini-OST
-505410  # Adventurer Package Plus
-505420  # Ellun Value Package
 505430  # Premium Prelude
 506660  # The West
 507870  # Robotpencil Presents: Brushwork Strategies for Materials Downloadable Content
 508030  # Robotpencil Presents: Alien Portrait Demo Downloadable Content
 508320  # Throne Rushers - Server
 508590  # SCP 087. Re
+509090  # The Metronomicon - Art Book
+509100  # The Metronomicon - The Original Score
 510270  # Might and Magic: Heroes VII – Trial by Fire - WW Uplay Activation
 510350  # Infinifactory OST
 510480  # Livelock - (Unused DLC Package)
 510670  # ChessBase 13 Academy - Weekly Games Update
 511880  # Trials of Azra Demo
+511890  # Mafia III - Judge, Jury and Executioner Weapons Pack
+512030  # Aztec Civilization Pack
 512530  # TuqueNewAPP05
+513470  # TyrfingCycle
 515640  # NBA 2K17 - Legend Edition Gold
 515970  # Thtough Abandoned 2. The Forest soundtrack
 516230  # Withering Kingdom: Flurry Of Arrows
@@ -2405,13 +2447,27 @@
 516860  # Of Kings And Men Dedicated Server
 517530  # Overload PAX West Demo
 518760  # PAYDAY 2: Community Safe Reward 1
+520740  # CyberThreat Demo
 520870  # Obduction - High Res Image
 520970  # 尘沙惑-原声音乐OST
+521770  # Digital Deluxe Extras
 524440  # Tom Clancy's The Division PTS
 524720  # Marauders: Marauders Cast and Crew Interviews
-525870  # WackyMoles
 525900  # Linux Dedicated Server
 526080  # South Park: Stunning and Brave
+529530  # Smash Up - Zombies
+530050  # Sumeru Demo
+530870  # Empyrion - Galactic Survival Dedicated Server
 532810  # PAYDAY 2: Housewarming Party
 534160  # Laid In America
 535140  # Laid In America: Making of LIA
+535200  # Atlas Reactor – All Freelancers Edition
+535420  # Nicklaus Design Course Forge
+535530  # Demon Hunter
+535770  # Farming Simulator 17 - Challenger MT700E Field Viper
+536310  # Company of Heroes 2 -10th Anniversary Skin Pack
+541330  # Galactic Adventures
+541750  # Valiant Explorer
+542900  # El Ninja - Halloween Edition
+543620  # Fractured Space - GAME DLC
+544100  # El Ninja - Controller Beta Testing

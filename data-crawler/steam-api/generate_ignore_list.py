@@ -4,13 +4,14 @@ from argparse import ArgumentParser
 import sys
 import codecs
 
-from util import retrieve_data, log_info
+from util import retrieve_data, log_info, log_fine
 from util import APP_LIST_URL, APP_URL_PREFIX
 
 
 # === Read the argument for the output path ===
 parser = ArgumentParser(description="Generates a list for the apps that cannot be found from Steam API")
 parser.add_argument("-o", "--out", help="the output path")
+parser.add_argument("-f", "--fine", help="display fine-grand logging", action="store_true")
 args = parser.parse_args()
 
 ignore_file = "./ignore_apps.txt"
@@ -18,7 +19,8 @@ if args.out is None:
     log_info("Didn't specify the output path. Use the default one: %s" % ignore_file)
 else:
     ignore_file = args.out
-
+if args.fine:
+    log_fine("Display find-grand logging")
 
 # === Retrieve the ids of the target applications ===
 data = retrieve_data(APP_LIST_URL)
@@ -66,7 +68,8 @@ while len(apps) != 0:
     # Save the price of the data to the file
     for (app_id, app_name) in this_time_apps:
         if data[str(app_id)]["success"] is False:
-            log_info("Add '%s' (id: %d) to the ignore list" % (app_name, app_id))
+            if args.fine:
+                log_fine("Add '%s' (id: %d) to the ignore list" % (app_name, app_id))
             ignore_file.write("%d  # %s\n" % (app_id, app_name))
 
 

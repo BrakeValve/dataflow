@@ -7,7 +7,7 @@ import json
 import time
 import io
 
-from util import log_info, log_warning, log_debug, ensure_path, retrieve_data
+from util import log_info, log_warning, log_fine, log_debug, ensure_path, retrieve_data
 from util import get_last_line, time_to_str, time_to_day, time_to_sec
 from util import APP_LIST_URL, APP_URL_PREFIX, APPS_PER_REQUEST
 
@@ -74,6 +74,7 @@ parser.add_argument("-n", "--num", help="the number of the first apps to be down
 parser.add_argument("-o", "--out", help="the output directory")
 parser.add_argument("-d", "--debug", help="enable debug mode", action="store_true")
 parser.add_argument("-m", "--re-meta", help="re-download exsiting metadata", action="store_true")
+parser.add_argument("-f", "--fine", help="display fine-grand logging", action="store_true")
 args = parser.parse_args()
 
 path = "./data"
@@ -85,6 +86,8 @@ else:
 
 if args.debug:
     log_debug("Debug mode enabled")
+if args.fine:
+    log_fine("Display find-grand logging")
 if args.re_meta:
     log_info("Redownload all metadata")
 
@@ -219,7 +222,8 @@ for cc in TARGET_COUNTRY:
             else:
                 # Check if it has price data
                 if "price_overview" not in data[str(app_id)]["data"]:
-                    log_fine("App '%s' (id: %d) is free." % (app_name, app_id))
+                    if args.fine:
+                        log_fine("App '%s' (id: %d) is free." % (app_name, app_id))
                     continue
 
                 # Retrieve the price
