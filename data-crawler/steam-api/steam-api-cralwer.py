@@ -8,7 +8,7 @@ import time
 import io
 
 from util import log_info, log_warning, log_fine, log_debug, ensure_path, retrieve_data
-from util import get_last_line, time_to_str, time_to_day, time_to_sec
+from util import get_last_line, time_to_str, time_to_day
 from util import APP_LIST_URL, APP_URL_PREFIX, APPS_PER_REQUEST
 
 # === Constants ===
