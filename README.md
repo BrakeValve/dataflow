@@ -18,9 +18,9 @@ dataflow/
 ├── data-preprocessor/                   
 │   ├── Game.py                          # Steam Game Object
 │   ├── listFile.py                      # file utils
-│   └── preprocessor.py                  # preprocessing main fuction
+│   └── preprocessor.py                  # preprocessing main function
 └─── model/
-    └── random-forest-model.py           # training demo using random forest model from sklearn
+    └── random-forest-model.py           # training demo using random forest model from `sklearn`
 ```
 ## Dependencies
 

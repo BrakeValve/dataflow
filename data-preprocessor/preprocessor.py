@@ -85,7 +85,7 @@ for g in game_set.values():
 
 # Output
 
-train_f = open(TRAINING_OUTPUT_DIRECTORY + '/traing_matrix.csv', 'w')
+train_f = open(TRAINING_OUTPUT_DIRECTORY + '/training_matrix.csv', 'w')
 train_o = []
 test_f = open(TRAINING_OUTPUT_DIRECTORY + '/testing_matrix.csv', 'w')
 test_o = []
