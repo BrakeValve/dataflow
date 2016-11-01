@@ -9,7 +9,7 @@ import datetime
 # === Constants ===
 APP_LIST_URL = "http://api.steampowered.com/ISteamApps/GetAppList/v0001/"
 APP_URL_PREFIX = "http://store.steampowered.com/api/appdetails?appids="
-WAITTING_TIME = 10  # in seconds
+WAITING_TIME = 10  # in seconds
 APPS_PER_REQUEST = 200  # The length of URL should be under 2000 characters
 
 
@@ -51,8 +51,8 @@ def retrieve_data(url):
         if response.status_code != 429:  # 429: Too many requests
             return None
 
-        log_warning("Retry GET '%s' after %d seconds." % (url, WAITTING_TIME))
-        time.sleep(WAITTING_TIME)
+        log_warning("Retry GET '%s' after %d seconds." % (url, WAITING_TIME))
+        time.sleep(WAITING_TIME)
 
         response = requests.get(url)
         # TODO: Maximum retrying times
