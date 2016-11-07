@@ -24,7 +24,7 @@ def out_append(o, t, price, o_price):
 
 
 def pruned_list(original_list):
-    return list(filter(lambda x: x.strip() != '', original_list))
+    return list(filter(lambda x: x != '', map(lambda x: x.strip(), original_list)))
 
 
 def load_list(url):
