@@ -81,8 +81,8 @@ print("Raw metirc result :")
 print(classification_report(y_true, y_pred))
 print('Accuracy : ' + str(accuracy_score(y_true, y_pred)) + '\n')
 
-mod_y_pred = map(lambda x: x if x == 1 else -1, y_pred)
-mod_y_true = map(lambda x: x if x == 1 else -1, y_true)
+mod_y_pred = list(map(lambda x: x if x == 1 else -1, y_pred))
+mod_y_true = list(map(lambda x: x if x == 1 else -1, y_true))
 
 print("More reasonable metirc result : ")
 print(classification_report(mod_y_true, mod_y_pred))
