@@ -20,9 +20,12 @@ dataflow/
 │   ├── listFile.py                      # file utils
 │   └── preprocessor.py                  # preprocessing main function
 └─── model/
-    └── random-forest-model.py           # training demo using random forest model from `sklearn`
+    └── random-forest-model.py           # training demo using random forest model from `scikit-learn`
 ```
 ## Dependencies
 
 - beautifulsoup4
 - requests
+- scikit-learn
+- numpy
+- scipy
